@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Fido - Veterinaria{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-white">
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-72 bg-white border-r border-gray-200 flex-shrink-0">
+            <div>
+                <div class="border-b border-gray-200 pb-4 px-6 py-4">
+                    <div class="text-2xl font-bold">
+                        Fido
+                    </div>
+                </div>
+                
+                <nav class="space-y-3 p-6">
+                    <a href="{% url 'home' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'home' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                        <i class="fas fa-th-large w-6 text-center"></i>
+                        <span class="font-semibold text-lg">Dashboard</span>
+                    </a>
+                    
+                    <a href="{% url 'owners_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'owners_list' or request.resolver_match.url_name == 'owner_create' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                        <i class="fas fa-users w-6 text-center"></i>
+                        <span class="font-semibold text-lg">Dueños</span>
+                    </a>
+                    
+                    <a href="{% url 'pets_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'pets_list' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                        <i class="fas fa-paw w-6 text-center"></i>
+                        <span class="font-semibold text-lg">Mascotas</span>
+                    </a>
+                    
+                    <a href="{% url 'appointments_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'appointments_list' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                        <i class="fas fa-calendar-alt w-6 text-center"></i>
+                        <span class="font-semibold text-lg">Citas</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white z-10">
+                <div class="px-6 pt-6 pb-2">
+                    <h2 class="text-3xl font-bold text-gray-900">{% block page_title %}Dashboard{% endblock %}</h2>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto bg-white px-6 pb-6">
+                {% block content %}
+                {% endblock %}
+            </main>
+
+            <footer class="bg-white border-t py-3 px-6">
+                <p class="text-center text-gray-500 text-sm">
+                    Fido 2025
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
+

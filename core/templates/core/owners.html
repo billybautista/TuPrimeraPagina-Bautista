@@ -1,0 +1,86 @@
+{% extends "core/base.html" %}
+
+{% block title %}Dueños - Fido{% endblock %}
+{% block page_title %}Dueños{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <p class="text-gray-500">Lista de propietarios</p>
+    <a href="{% url 'owner_create' %}" class="bg-orange-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center space-x-2">
+        <span class="text-xl">+</span>
+        <span>Nuevo Dueño</span>
+    </a>
+</div>
+
+<div class="mb-6">
+    <form method="get" class="relative max-w-md">
+        <input 
+            type="text" 
+            name="q"
+            placeholder="Buscar dueños por nombre o email..." 
+            value="{{ query }}"
+            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+        >
+        <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
+    </form>
+    {% if query %}
+    <div class="mt-3 flex items-center justify-between">
+        <p class="text-sm text-gray-600">
+            Se encontraron <span class="font-semibold text-orange-600">{{ owners|length }}</span> resultado{{ owners|length|pluralize:"s" }} para "{{ query }}"
+        </p>
+        <a href="{% url 'owners_list' %}" class="text-sm text-orange-500 hover:text-orange-600 font-medium">
+            Limpiar búsqueda
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+{% if owners %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for owner in owners %}
+    <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ owner.name }}</h3>
+        
+        <div class="space-y-3">
+            <div class="flex items-center space-x-3 text-gray-600">
+                <i class="fas fa-envelope w-5"></i>
+                <span class="text-sm">{{ owner.email }}</span>
+            </div>
+            
+            <div class="flex items-center space-x-3 text-gray-600">
+                <i class="fas fa-phone w-5"></i>
+                <span class="text-sm">{{ owner.phone }}</span>
+            </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-gray-200">
+            <p class="text-sm font-semibold text-gray-700">{{ owner.pets.count }} mascota{{ owner.pets.count|pluralize:"s" }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-12">
+    {% if query %}
+        <i class="fas fa-search text-gray-400 text-8xl mb-4"></i>
+        <h3 class="mt-4 text-xl font-semibold text-gray-900">No se encontraron resultados</h3>
+        <div class="mt-6">
+            <a href="{% url 'owners_list' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-all">
+                <span>Ver todos los dueños</span>
+            </a>
+        </div>
+    {% else %}
+        <i class="fas fa-users text-gray-400 text-8xl mb-4"></i>
+        <h3 class="mt-4 text-xl font-semibold text-gray-900">No hay dueños registrados</h3>
+        <p class="mt-2 text-gray-500">Comienza agregando un nuevo dueño haciendo clic en el botón de arriba.</p>
+        <div class="mt-6">
+            <a href="{% url 'owner_create' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-all">
+                <span class="text-xl mr-2">+</span>
+                <span>Agregar Primer Dueño</span>
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
