@@ -6,6 +6,7 @@ from .views import (
     pets_list,
     pet_create,
     appointments_list,
+    appointment_create,
 )
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path("mascotas/", pets_list, name="pets_list"),
     path("mascotas/crear/", pet_create, name="pet_create"),
     path("citas/", appointments_list, name="appointments_list"),
+    path("citas/crear/", appointment_create, name="appointment_create"),
 ]

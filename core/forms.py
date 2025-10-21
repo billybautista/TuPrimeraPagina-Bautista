@@ -1,5 +1,5 @@
 from django import forms
-from .models import Owner, Pet
+from .models import Owner, Pet, Appointment
 
 
 class OwnerForm(forms.ModelForm):
@@ -21,4 +21,17 @@ class PetForm(forms.ModelForm):
             "name": forms.TextInput(attrs={"placeholder": "Nombre"}),
             "age": forms.NumberInput(attrs={"placeholder": "Edad"}),
             "breed": forms.TextInput(attrs={"placeholder": "Raza"}),
+        }
+
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ["pet", "date", "time", "reason"]
+        widgets = {
+            "date": forms.DateInput(attrs={"type": "date"}),
+            "time": forms.TimeInput(attrs={"type": "time"}),
+            "reason": forms.Textarea(
+                attrs={"rows": 3, "placeholder": "Motivo de la cita"}
+            ),
         }

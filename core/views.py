@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import OwnerForm, PetForm
-from .models import Owner, Pet
+from .forms import OwnerForm, PetForm, AppointmentForm
+from .models import Owner, Pet, Appointment
 
 
 def index(request):
@@ -64,4 +64,28 @@ def pet_create(request):
 
 def appointments_list(request):
     # Lista de citas
-    return render(request, "core/appointments.html")
+    query = request.GET.get("q", "")
+    appointments = Appointment.objects.all().order_by("-date", "-time")
+
+    # Buscar por nombre de mascota
+    if query:
+        appointments = appointments.filter(pet__name__icontains=query)
+
+    return render(
+        request,
+        "core/appointments.html",
+        {"appointments": appointments, "query": query},
+    )
+
+
+def appointment_create(request):
+    # Crear cita
+    if request.method == "POST":
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "¡Cita agendada exitosamente!")
+            return redirect("appointments_list")
+    else:
+        form = AppointmentForm()
+    return render(request, "core/appointments_create.html", {"form": form})
