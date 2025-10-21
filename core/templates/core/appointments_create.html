@@ -53,9 +53,6 @@
                         {% endfor %}
                     </select>
                 </div>
-                {% if form.pet.errors %}
-                    <p class="mt-2 text-sm text-red-600">{{ form.pet.errors.0 }}</p>
-                {% endif %}
             </div>
 
           
@@ -64,20 +61,12 @@
                     Fecha
                     <span class="text-red-500">*</span>
                 </label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fas fa-calendar text-gray-400"></i>
-                    </div>
-                    <input type="date" 
-                           name="{{ form.date.name }}" 
-                           id="{{ form.date.id_for_label }}"
-                           value="{{ form.date.value|default:'' }}"
-                           class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-                           required>
-                </div>
-                {% if form.date.errors %}
-                    <p class="mt-2 text-sm text-red-600">{{ form.date.errors.0 }}</p>
-                {% endif %}
+                <input type="date" 
+                       name="{{ form.date.name }}" 
+                       id="{{ form.date.id_for_label }}"
+                       value="{{ form.date.value|default:'' }}"
+                       class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                       required>
             </div>
 
            
@@ -86,20 +75,12 @@
                     Hora
                     <span class="text-red-500">*</span>
                 </label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fas fa-clock text-gray-400"></i>
-                    </div>
-                    <input type="time" 
-                           name="{{ form.time.name }}" 
-                           id="{{ form.time.id_for_label }}"
-                           value="{{ form.time.value|default:'' }}"
-                           class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-                           required>
-                </div>
-                {% if form.time.errors %}
-                    <p class="mt-2 text-sm text-red-600">{{ form.time.errors.0 }}</p>
-                {% endif %}
+                <input type="time" 
+                       name="{{ form.time.name }}" 
+                       id="{{ form.time.id_for_label }}"
+                       value="{{ form.time.value|default:'' }}"
+                       class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                       required>
             </div>
 
            
@@ -110,13 +91,10 @@
                 </label>
                 <textarea name="{{ form.reason.name }}" 
                           id="{{ form.reason.id_for_label }}"
-                          class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
                           rows="3"
                           placeholder="Ej: Vacunación, chequeo general, consulta..."
                           required>{{ form.reason.value|default:'' }}</textarea>
-                {% if form.reason.errors %}
-                    <p class="mt-2 text-sm text-red-600">{{ form.reason.errors.0 }}</p>
-                {% endif %}
             </div>
 
           

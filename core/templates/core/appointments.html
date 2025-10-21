@@ -74,16 +74,14 @@
 {% else %}
 <div class="text-center py-12">
     {% if query %}
-        <i class="fas fa-search text-gray-400 text-8xl mb-4"></i>
-        <h3 class="mt-4 text-xl font-semibold text-gray-900">No se encontraron resultados</h3>
+        <h3 class="text-xl font-semibold text-gray-900">No se encontraron resultados</h3>
         <div class="mt-6">
             <a href="{% url 'appointments_list' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
                 <span>Ver todas las citas</span>
             </a>
         </div>
     {% else %}
-        <i class="fas fa-calendar text-gray-400 text-8xl mb-4"></i>
-        <h3 class="mt-4 text-xl font-semibold text-gray-900">No hay citas programadas</h3>
+        <h3 class="text-xl font-semibold text-gray-900">No hay citas programadas</h3>
         <p class="mt-2 text-gray-500">Comienza agregando una nueva cita haciendo clic en el botón de arriba.</p>
         <div class="mt-6">
             <a href="{% url 'appointment_create' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">

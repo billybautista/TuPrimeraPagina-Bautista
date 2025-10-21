@@ -18,22 +18,22 @@
                 </div>
                 
                 <nav class="space-y-3 p-6">
-                    <a href="{% url 'home' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'home' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                    <a href="{% url 'home' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg {% if request.resolver_match.url_name == 'home' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
                         <i class="fas fa-th-large w-6 text-center"></i>
                         <span class="font-semibold text-lg">Dashboard</span>
                     </a>
                     
-                    <a href="{% url 'owners_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'owners_list' or request.resolver_match.url_name == 'owner_create' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                    <a href="{% url 'owners_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg {% if request.resolver_match.url_name == 'owners_list' or request.resolver_match.url_name == 'owner_create' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
                         <i class="fas fa-users w-6 text-center"></i>
                         <span class="font-semibold text-lg">Dueños</span>
                     </a>
                     
-                    <a href="{% url 'pets_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'pets_list' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                    <a href="{% url 'pets_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg {% if request.resolver_match.url_name == 'pets_list' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
                         <i class="fas fa-paw w-6 text-center"></i>
                         <span class="font-semibold text-lg">Mascotas</span>
                     </a>
                     
-                    <a href="{% url 'appointments_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg transition-all {% if request.resolver_match.url_name == 'appointments_list' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                    <a href="{% url 'appointments_list' %}" class="flex items-center space-x-4 px-4 py-2 rounded-lg {% if request.resolver_match.url_name == 'appointments_list' %} bg-orange-500 text-white shadow-md{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
                         <i class="fas fa-calendar-alt w-6 text-center"></i>
                         <span class="font-semibold text-lg">Citas</span>
                     </a>

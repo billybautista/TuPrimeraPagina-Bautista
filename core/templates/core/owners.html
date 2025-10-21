@@ -65,16 +65,15 @@
         <i class="fas fa-search text-gray-400 text-8xl mb-4"></i>
         <h3 class="mt-4 text-xl font-semibold text-gray-900">No se encontraron resultados</h3>
         <div class="mt-6">
-            <a href="{% url 'owners_list' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-all">
+            <a href="{% url 'owners_list' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
                 <span>Ver todos los dueños</span>
             </a>
         </div>
     {% else %}
-        <i class="fas fa-users text-gray-400 text-8xl mb-4"></i>
-        <h3 class="mt-4 text-xl font-semibold text-gray-900">No hay dueños registrados</h3>
+        <h3 class="text-xl font-semibold text-gray-900">No hay dueños registrados</h3>
         <p class="mt-2 text-gray-500">Comienza agregando un nuevo dueño haciendo clic en el botón de arriba.</p>
         <div class="mt-6">
-            <a href="{% url 'owner_create' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-all">
+            <a href="{% url 'owner_create' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
                 <span class="text-xl mr-2">+</span>
                 <span>Agregar Primer Dueño</span>
             </a>
