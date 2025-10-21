@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import OwnerForm, PetForm
-from .models import Owner
+from .models import Owner, Pet
 
 
 def index(request):
@@ -39,7 +39,14 @@ def owner_create(request):
 
 def pets_list(request):
     # Lista de mascotas
-    return render(request, "core/pets.html")
+    query = request.GET.get("q", "")
+    pets = Pet.objects.all().order_by("-created_at")
+
+    # Buscar por nombre
+    if query:
+        pets = pets.filter(name__icontains=query)
+
+    return render(request, "core/pets.html", {"pets": pets, "query": query})
 
 
 def pet_create(request):

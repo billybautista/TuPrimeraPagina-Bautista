@@ -6,168 +6,87 @@
 {% block content %}
 <div class="flex items-center justify-between mb-6">
     <p class="text-gray-500">Gestiona la información de las mascotas</p>
-    <a href="{% url 'pet_create' %}" class="bg-orange-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center space-x-2">
+    <a href="{% url 'pet_create' %}" class="bg-orange-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-orange-600 flex items-center space-x-2">
         <span class="text-xl">+</span>
         <span>Nueva Mascota</span>
     </a>
 </div>
 
 <div class="mb-6">
-    <div class="relative max-w-md">
+    <form method="get" class="relative max-w-md">
         <input 
             type="text" 
-            placeholder="Buscar mascotas..." 
+            name="q"
+            placeholder="Buscar mascotas por nombre o raza..." 
+            value="{{ query }}"
             class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
         >
         <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
+    </form>
+    {% if query %}
+    <div class="mt-3 flex items-center justify-between">
+        <p class="text-sm text-gray-600">
+            Se encontraron <span class="font-semibold text-orange-600">{{ pets|length }}</span> resultado{{ pets|length|pluralize:"s" }} para "{{ query }}"
+        </p>
+        <a href="{% url 'pets_list' %}" class="text-sm text-orange-500 hover:text-orange-600 font-medium">
+            Limpiar búsqueda
+        </a>
     </div>
+    {% endif %}
 </div>
 
+{% if pets %}
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Max</h3>
+    {% for pet in pets %}
+    <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ pet.name }}</h3>
         
         <div class="space-y-2.5">
             <div class="flex justify-between">
-                <span class="text-gray-600">Especie:</span>
-                <span class="font-semibold text-gray-900">Perro</span>
+                <span class="text-gray-600">Tipo:</span>
+                <span class="font-semibold text-gray-900">{{ pet.get_pet_type_display }}</span>
             </div>
             
             <div class="flex justify-between">
                 <span class="text-gray-600">Raza:</span>
-                <span class="font-semibold text-gray-900">Golden Retriever</span>
+                <span class="font-semibold text-gray-900">{{ pet.breed }}</span>
             </div>
             
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between">
                 <span class="text-gray-600">Edad:</span>
-                <span class="font-semibold text-gray-900 flex items-center">
-                    <i class="fas fa-calendar mr-1"></i>
-                    3 años
-                </span>
+                <span class="font-semibold text-gray-900">{{ pet.age }} año{{ pet.age|pluralize:"s" }}</span>
             </div>
             
             <div class="pt-3 border-t border-gray-200">
                 <span class="text-gray-600">Dueño: </span>
-                <span class="font-semibold text-gray-900">Carlos López</span>
+                <span class="font-semibold text-gray-900">{{ pet.owner.name }}</span>
             </div>
         </div>
     </div>
-
-    <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Luna</h3>
-        
-        <div class="space-y-2.5">
-            <div class="flex justify-between">
-                <span class="text-gray-600">Especie:</span>
-                <span class="font-semibold text-gray-900">Gato</span>
-            </div>
-            
-            <div class="flex justify-between">
-                <span class="text-gray-600">Raza:</span>
-                <span class="font-semibold text-gray-900">Siamés</span>
-            </div>
-            
-            <div class="flex justify-between items-center">
-                <span class="text-gray-600">Edad:</span>
-                <span class="font-semibold text-gray-900 flex items-center">
-                    <i class="fas fa-calendar mr-1"></i>
-                    2 años
-                </span>
-            </div>
-            
-            <div class="pt-3 border-t border-gray-200">
-                <span class="text-gray-600">Dueño: </span>
-                <span class="font-semibold text-gray-900">Ana García</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Rocky</h3>
-        
-        <div class="space-y-2.5">
-            <div class="flex justify-between">
-                <span class="text-gray-600">Especie:</span>
-                <span class="font-semibold text-gray-900">Perro</span>
-            </div>
-            
-            <div class="flex justify-between">
-                <span class="text-gray-600">Raza:</span>
-                <span class="font-semibold text-gray-900">Bulldog</span>
-            </div>
-            
-            <div class="flex justify-between items-center">
-                <span class="text-gray-600">Edad:</span>
-                <span class="font-semibold text-gray-900 flex items-center">
-                    <i class="fas fa-calendar mr-1"></i>
-                    5 años
-                </span>
-            </div>
-            
-            <div class="pt-3 border-t border-gray-200">
-                <span class="text-gray-600">Dueño: </span>
-                <span class="font-semibold text-gray-900">Pedro Martínez</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Bella</h3>
-        
-        <div class="space-y-2.5">
-            <div class="flex justify-between">
-                <span class="text-gray-600">Especie:</span>
-                <span class="font-semibold text-gray-900">Perro</span>
-            </div>
-            
-            <div class="flex justify-between">
-                <span class="text-gray-600">Raza:</span>
-                <span class="font-semibold text-gray-900">Labrador</span>
-            </div>
-            
-            <div class="flex justify-between items-center">
-                <span class="text-gray-600">Edad:</span>
-                <span class="font-semibold text-gray-900 flex items-center">
-                    <i class="fas fa-calendar mr-1"></i>
-                    1 año
-                </span>
-            </div>
-            
-            <div class="pt-3 border-t border-gray-200">
-                <span class="text-gray-600">Dueño: </span>
-                <span class="font-semibold text-gray-900">Pedro Martínez</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Miau</h3>
-        
-        <div class="space-y-2.5">
-            <div class="flex justify-between">
-                <span class="text-gray-600">Especie:</span>
-                <span class="font-semibold text-gray-900">Gato</span>
-            </div>
-            
-            <div class="flex justify-between">
-                <span class="text-gray-600">Raza:</span>
-                <span class="font-semibold text-gray-900">Persa</span>
-            </div>
-            
-            <div class="flex justify-between items-center">
-                <span class="text-gray-600">Edad:</span>
-                <span class="font-semibold text-gray-900 flex items-center">
-                    <i class="fas fa-calendar mr-1"></i>
-                    4 años
-                </span>
-            </div>
-            
-            <div class="pt-3 border-t border-gray-200">
-                <span class="text-gray-600">Dueño: </span>
-                <span class="font-semibold text-gray-900">María Rodríguez</span>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
+{% else %}
+<div class="text-center py-12">
+    {% if query %}
+        <i class="fas fa-search text-gray-400 text-8xl mb-4"></i>
+        <h3 class="mt-4 text-xl font-semibold text-gray-900">No se encontraron resultados</h3>
+        <div class="mt-6">
+            <a href="{% url 'pets_list' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+                <span>Ver todas las mascotas</span>
+            </a>
+        </div>
+    {% else %}
+        <i class="fas fa-paw text-gray-400 text-8xl mb-4"></i>
+        <h3 class="mt-4 text-xl font-semibold text-gray-900">No hay mascotas registradas</h3>
+        <p class="mt-2 text-gray-500">Comienza agregando una nueva mascota haciendo clic en el botón de arriba.</p>
+        <div class="mt-6">
+            <a href="{% url 'pet_create' %}" class="inline-flex items-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+                <span class="text-xl mr-2">+</span>
+                <span>Agregar Primera Mascota</span>
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endif %}
 {% endblock %}
 
