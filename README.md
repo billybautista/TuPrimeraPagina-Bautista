@@ -1,6 +1,6 @@
 # TuPrimeraPagina-Bautista
 
-Sistema de gestión "Fido"
+Sistema de gestión "Fido", para veterinarias
 
 ## Instalación
 
@@ -22,8 +22,8 @@ python manage.py runserver
 ## Funcionalidades
 
 - Gestión de dueños de mascotas
-- Registro de mascotas (pendiente)
-- Sistema de citas (pendiente)
+- Registro de mascotas
+- Sistema de citas
 
 # Pasos para probar
 
