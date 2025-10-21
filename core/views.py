@@ -5,8 +5,24 @@ from .models import Owner, Pet, Appointment
 
 
 def index(request):
-    # Dashboard
-    return render(request, "core/index.html")
+    # pagina principal
+    from datetime import date
+
+    total_owners = Owner.objects.count()
+    total_pets = Pet.objects.count()
+    total_appointments = Appointment.objects.count()
+
+    # las proximas 3 citas
+    upcoming_appointments = Appointment.objects.all().order_by("date", "time")[:3]
+
+    context = {
+        "total_owners": total_owners,
+        "total_pets": total_pets,
+        "total_appointments": total_appointments,
+        "upcoming_appointments": upcoming_appointments,
+    }
+
+    return render(request, "core/index.html", context)
 
 
 def owners_list(request):

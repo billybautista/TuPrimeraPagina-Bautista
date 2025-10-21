@@ -11,7 +11,7 @@
         <div class="flex items-start justify-between">
             <div>
                 <p class="text-gray-600 text-sm mb-2">Total Dueños</p>
-                <p class="text-4xl font-bold text-gray-900">124</p>
+                <p class="text-4xl font-bold text-gray-900">{{ total_owners }}</p>
             </div>
             <div class="text-gray-400">
                 <i class="fas fa-users text-2xl"></i>
@@ -23,7 +23,7 @@
         <div class="flex items-start justify-between">
             <div>
                 <p class="text-gray-600 text-sm mb-2">Mascotas</p>
-                <p class="text-4xl font-bold text-gray-900">187</p>
+                <p class="text-4xl font-bold text-gray-900">{{ total_pets }}</p>
             </div>
             <div class="text-gray-400">
                 <i class="fas fa-paw text-2xl"></i>
@@ -34,71 +34,41 @@
     <div class="bg-white rounded-xl border border-gray-200 p-6">
         <div class="flex items-start justify-between">
             <div>
-                <p class="text-gray-600 text-sm mb-2">Total de citas</p>
-                <p class="text-4xl font-bold text-gray-900">12</p>
+                <p class="text-gray-600 text-sm mb-2">Citas</p>
+                <p class="text-4xl font-bold text-gray-900">{{ total_appointments }}</p>
             </div>
             <div class="text-gray-400">
                 <i class="fas fa-calendar-check text-2xl"></i>
             </div>
         </div>
     </div>
-
-
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <div class="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6">
-        <h3 class="text-2xl font-bold text-gray-900 mb-6">Próximas Citas</h3>
-        
+<div class="bg-white rounded-xl border border-gray-200 p-6">
+    <h3 class="text-2xl font-bold text-gray-900 mb-6">Próximas Citas</h3>
+    
+    {% if upcoming_appointments %}
         <div class="space-y-4">
+            {% for appointment in upcoming_appointments %}
             <div class="flex items-center justify-between py-4 border-b border-gray-100">
                 <div>
-                    <p class="text-lg font-bold text-gray-900">Max</p>
-                    <p class="text-gray-500">Carlos López</p>
+                    <p class="text-lg font-bold text-gray-900">{{ appointment.pet.name }}</p>
+                    <p class="text-gray-500">{{ appointment.pet.owner.name }}</p>
                 </div>
-                <p class="text-orange-500 font-semibold">10:00 AM</p>
-            </div>
-            
-            <div class="flex items-center justify-between py-4 border-b border-gray-100">
-                <div>
-                    <p class="text-lg font-bold text-gray-900">Luna</p>
-                    <p class="text-gray-500">Ana García</p>
+                <div class="text-right">
+                    <p class="text-orange-500 font-semibold">{{ appointment.time|time:"g:i A" }}</p>
+                    <p class="text-sm text-gray-500">{{ appointment.date }}</p>
                 </div>
-                <p class="text-orange-500 font-semibold">11:30 AM</p>
             </div>
-            
-            <div class="flex items-center justify-between py-4">
-                <div>
-                    <p class="text-lg font-bold text-gray-900">Rocky</p>
-                    <p class="text-gray-500">Pedro Martínez</p>
-                </div>
-                <p class="text-orange-500 font-semibold">2:00 PM</p>
-            </div>
+            {% endfor %}
         </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-gray-200 p-6">
-        <h3 class="text-2xl font-bold text-gray-900 mb-6">Actividad Reciente</h3>
-        
-        <div class="space-y-6">
-            <div>
-                <p class="font-semibold text-gray-900">Nueva mascota registrada</p>
-                <p class="text-sm text-gray-600">Bella - Golden Retriever</p>
-                <p class="text-xs text-gray-400 mt-1">Hace 2h</p>
-            </div>
-            
-            <div>
-                <p class="font-semibold text-gray-900">Cita completada</p>
-                <p class="text-sm text-gray-600">Max - Chequeo general</p>
-                <p class="text-xs text-gray-400 mt-1">Hace 3h</p>
-            </div>
-            
-            <div>
-                <p class="font-semibold text-gray-900">Nuevo dueño registrado</p>
-                <p class="text-sm text-gray-600">María Rodríguez</p>
-                <p class="text-xs text-gray-400 mt-1">Hace 5h</p>
-            </div>
+    {% else %}
+        <div class="text-center py-8">
+            <p class="text-gray-500">No hay citas programadas</p>
+            <a href="{% url 'appointment_create' %}" class="inline-block mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+                Agendar Cita
+            </a>
         </div>
-    </div>
+    {% endif %}
 </div>
 {% endblock %}
